@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Popes</title>
+	<% if (htmlWebpackPlugin.options.env == 'development') { %>
+		<% cssFiles.forEach(function(cssFile) { %>
+		<link href="<%=webpackConfig.output.publicPath %><%= cssFile %>" rel="stylesheet">
+		<% }); %>
+	<% } %>
+</head>
+<body>
+	<div id="react-root"></div>
+	<% if (htmlWebpackPlugin.options.env == 'development') { %>
+		<script src="/node_modules/_dll/styles.development.js"></script>
+		<script src="/node_modules/_dll/vendors.development.js"></script>
+	<% jsFiles.forEach(function(jsFile) { %>
+		<script src="<%=webpackConfig.output.publicPath %><%= jsFile %>"></script>
+	<% }); %>
+	<% } else { %>
+		<script src="<%=webpackConfig.output.publicPath %>vendors.js"></script>
+	<% } %>
+</body>
+</html>
