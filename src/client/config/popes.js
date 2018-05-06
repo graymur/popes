@@ -4,6 +4,10 @@ const sortDateDesc = (a, b) => (new Date(a[0]) > new Date(b[0]) ? -1 : 1)
 const sortDateAsc = (a, b) => (new Date(a[0]) > new Date(b[0]) ? 1 : -1)
 const sortGroupSizeDesc = (a, b) => (a[1].length > b[1].length ? -1 : 1)
 const sortGroupSizeAsc = (a, b) => (a[1].length > b[1].length ? 1 : -1)
+const intZero = num => Number(num) === 0 ? 'Less then one' : num
+const current = num => Number(num) < 1 ? 'Current' : num
+
+import flow from 'lodash/flow'
 
 export default {
 	dataUrl: '/data/popes.json',
@@ -38,6 +42,7 @@ export default {
 			title: 'Rule duration',
 			defaultSort: 'desc',
 			sortGroups: sortIntDesc,
+			groupTitleCb: flow(intZero, current)
 		},
 		nationality: {
 			getter: 'nationality',

@@ -45,8 +45,14 @@ class App extends Component {
 			return false
 		}
 
-		const groupped = addPositions(groupItems(items, config.fields[key], currentSort))
+		const currentConfig = config.fields[key]
+
+		let groupped = addPositions(groupItems(items, currentConfig, currentSort))
 		const sortedItems = sortBy(flatMap(groupped, group => group[1]), x => x.id)
+
+		if (currentConfig.groupTitleCb) {
+			groupped = groupped.map(x => [currentConfig.groupTitleCb(x[0]), x[1]])
+		}
 
 		this.setState({
 			currentKey: key,
