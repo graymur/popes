@@ -54,17 +54,15 @@ class App extends Component {
 			groupped,
 			sortedItems,
 			maxTop: maxBy(sortedItems, x => x.__top).__top,
-			groups: false,
+			groups: groupped,
 		})
 
 		clearTimeout(this.clearFlyingFlagTimeout)
 
-		this.clearFlyingFlagTimeout = setTimeout(() => {
-			this.setState({
-				flying: false,
-				groups: groupped,
-			})
-		}, useTransition ? constants.transitionSpeed + 150 : 10)
+		this.clearFlyingFlagTimeout = setTimeout(
+			() => this.setState({ flying: false }),
+			useTransition ? constants.transitionSpeed + 150 : 10,
+		)
 	}
 
 	updatePos = items => {

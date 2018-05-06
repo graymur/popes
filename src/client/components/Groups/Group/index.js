@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledGroup, StyledGroupTitle, StyledGroupItems } from './styles'
+import { StyledGroup, StyledGroupTitle, StyledGroupItems, StyledPlaceholder } from './styles'
 import GroupItem from '../GroupItem'
 import Item from '../../Item'
 import debounce from 'lodash/debounce'
@@ -30,14 +30,22 @@ export default class extends React.Component {
 		updatePos(positions)
 	}
 
-	render() {
+	renderItems() {
 		const { group, flying } = this.props
 
-		this.items = group[1].map((item, itemIndex) => (
-			<GroupItem key={itemIndex} flying={flying} innerRef={this.addNodeRef}>
-				<Item {...item} />
-			</GroupItem>
-		))
+		return (
+			<Scrollbars autoHeight>
+				<StyledGroupItems>{group[1].map((item, itemIndex) => (
+					<GroupItem key={itemIndex} flying={flying} innerRef={this.addNodeRef}>
+						<Item {...item} />
+					</GroupItem>
+				))}</StyledGroupItems>
+			</Scrollbars>
+		)
+	}
+
+	render() {
+		const { group, flying } = this.props
 
 		return (
 			<StyledGroup
@@ -45,9 +53,7 @@ export default class extends React.Component {
 				innerRef={el => (this.groupNode = el)}
 			>
 				<StyledGroupTitle>{group[0]}</StyledGroupTitle>
-				<Scrollbars autoHeight>
-					<StyledGroupItems>{this.items}</StyledGroupItems>
-				</Scrollbars>
+				{flying ? <StyledPlaceholder/> : this.renderItems()				}
 			</StyledGroup>
 		)
 	}

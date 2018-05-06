@@ -1,6 +1,6 @@
 import { css } from 'glamor' // eslint-disable-line
 import glamorous from 'glamorous'
-import constants from '../../../utils/constants'
+import constants from 'client/utils/constants'
 
 export const StyledGroupItem = glamorous.div(
 	{

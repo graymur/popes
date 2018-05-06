@@ -1,4 +1,3 @@
-import { css } from 'glamor' // eslint-disable-line
 import glamorous from 'glamorous'
 
 export const StyledGroups = glamorous.div({
